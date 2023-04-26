@@ -16,11 +16,12 @@ if(!isset($_SESSION ["Usuario"])){
       $id= $_POST['id'];
       $nombre= $con->real_escape_string($_POST['nombreHerramienta']);
       $cantidad=$con->real_escape_string($_POST['cantidadHerramienta']);
+      $novedades=$con->real_escape_string($_POST['novedades']);
      
       
 
 
-      $actualiza="UPDATE herramientas SET nombreHerramienta='$nombre', cantidad='$cantidad' WHERE idHerramienta='$id'";
+      $actualiza="UPDATE herramientas SET nombreHerramienta='$nombre', cantidad='$cantidad', novedades='$novedades' WHERE idHerramienta='$id'";
       
       $actualizar= $con->query($actualiza);
       header("location: tablaHerramientas.php");
@@ -62,14 +63,20 @@ if(!isset($_SESSION ["Usuario"])){
             <input type="hidden" name="id" id="id" value="<?php echo $dato['idHerramienta'];?>">
             <div class="form-floating m-4 mt-2">
                 <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="nombreHerramienta"
-                placeholder="Nombre" name="nombreHerramienta" value="<?php echo $dato['nombreHerramienta'];?>">
+                placeholder="Nombre" name="nombreHerramienta" value="<?php echo $dato['nombreHerramienta'];?>" maxlength="20">
                 <label for="nombreHerramienta" class="text-white"><i class="bi bi"></i> Nombre de la Herramienta:</label>
             </div>
 
             <div class="form-floating m-4 mt-2">
                 <input type="number" class="form-control bg-primary bg-opacity-50 text-white" id="cantidadHerramienta"
-                placeholder="Cantidad" name="cantidadHerramienta" value="<?php echo $dato['cantidad'];?>">
+                placeholder="Cantidad" name="cantidadHerramienta" value="<?php echo $dato['cantidad'];?>" maxlength="3">
                 <label for="cantidadHerramienta" class="text-white"><i class="bi bi"></i> Cantidad:</label>
+            </div>
+
+            <div class="form-floating m-4 mt-2">
+                <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="novedades"
+                placeholder="Novedades" name="novedades" value="<?php echo $dato['novedades'];?>" maxlength="300">
+                <label for="novedades" class="text-white"><i class="bi bi"></i> Novedades:</label>
             </div>
          
 

@@ -1,22 +1,28 @@
 <?php
+include 'conexion.php';
 
+$id = $_GET["id"];
 
- include 'conexion.php';
+// Verificar si el registro se está utilizando en la tabla ganado
+$sql_verificar = "SELECT COUNT(*) as cuenta FROM ganado WHERE idSocio='$id'";
+$result_verificar = $con->query($sql_verificar);
+$cuenta = $result_verificar->fetch_assoc()["cuenta"];
+if ($cuenta > 0) {
+    echo "No se puede eliminar el socio porque está siendo utilizado en la tabla ganado.";
+    exit();
+}
 
- 
- $id = $_GET["id"];
+$sql = "DELETE FROM socios WHERE idSocio='$id'";
 
- $sql = "DELETE FROM socios WHERE idSocio='$id'";
-
- if($con -> query($sql)==TRUE){
-   
-
- }
+if($con -> query($sql)==TRUE){
+    // El registro se eliminó correctamente
+}
 
 $con->close();
 
 
 include 'conexion.php';
+
 $sql="SELECT * FROM socios ORDER BY nombreSocio ASC LIMIT 10";        
 $resultset = $con->query($sql);
 if($resultset->num_rows>0){
@@ -25,7 +31,7 @@ if($resultset->num_rows>0){
     <td>".$fila["idSocio"]."</td>
     <td>".$fila["nombreSocio"]."</td>
     <td>".$fila["apellidoSocio"]."</td> 
-    <td>".$fila["documentoSocio"]."</td> 
+    <td>".$fila["tipoDocumento"]." ".$fila["documentoSocio"]."</td> 
     <td>".$fila["telefonoSocio"]."</td> 
     <td>".$fila["marca"]."</td> 
     <td class='text-end pe-4 ps-4'> 
@@ -35,7 +41,4 @@ if($resultset->num_rows>0){
     </td></tr>"; 
  }
 }
-
 ?>
-
-

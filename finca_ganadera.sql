@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 03-03-2023 a las 01:29:08
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 7.4.29
+-- Host: 127.0.0.1
+-- Generation Time: Apr 13, 2023 at 12:06 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `finca_ganadera`
+-- Database: `finca_ganadera`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `actividades`
+-- Table structure for table `actividades`
 --
 
 CREATE TABLE `actividades` (
@@ -34,7 +34,7 @@ CREATE TABLE `actividades` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `actividades`
+-- Dumping data for table `actividades`
 --
 
 INSERT INTO `actividades` (`idAct`, `nombreActividad`, `descripcion`) VALUES
@@ -42,12 +42,13 @@ INSERT INTO `actividades` (`idAct`, `nombreActividad`, `descripcion`) VALUES
 (20, 'Control del ganado', 'revision de ganado potrero 4'),
 (22, 'Mantenimietno', 'Rozar potrero 3 y sanearlo'),
 (23, '....', ''),
-(24, 'kkk', 'fghjkl');
+(25, 'Rosar potreros', 'rosar potreros 1 y 2'),
+(26, 'Vigilancia', 'Realizar patrullaje y conteo de reses');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `administrador`
+-- Table structure for table `administrador`
 --
 
 CREATE TABLE `administrador` (
@@ -57,7 +58,7 @@ CREATE TABLE `administrador` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `administrador`
+-- Dumping data for table `administrador`
 --
 
 INSERT INTO `administrador` (`idAdmin`, `usuario`, `password`) VALUES
@@ -66,7 +67,7 @@ INSERT INTO `administrador` (`idAdmin`, `usuario`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `agenda`
+-- Table structure for table `agenda`
 --
 
 CREATE TABLE `agenda` (
@@ -77,18 +78,37 @@ CREATE TABLE `agenda` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `agenda`
+-- Dumping data for table `agenda`
 --
 
 INSERT INTO `agenda` (`idActividad`, `idAct`, `fecha`, `idEmpledo`) VALUES
-(39, 20, '2022-11-18', 16),
-(47, 19, '2022-11-11', 27),
-(50, 22, '2022-11-25', 16);
+(53, 26, '2023-04-15', 177);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `empleados`
+-- Table structure for table `car`
+--
+
+CREATE TABLE `car` (
+  `idCargo` int(11) NOT NULL,
+  `cargo` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `car`
+--
+
+INSERT INTO `car` (`idCargo`, `cargo`) VALUES
+(1, 'Obrero'),
+(2, 'Concinero(a)'),
+(3, 'Veterinario'),
+(4, 'Vigilante');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `empleados`
 --
 
 CREATE TABLE `empleados` (
@@ -97,24 +117,31 @@ CREATE TABLE `empleados` (
   `apellidoEmpleado` varchar(50) NOT NULL,
   `documentoEmpleado` int(50) NOT NULL,
   `telefonoEmpleado` varchar(50) NOT NULL,
-  `rangoEmpleado` varchar(50) NOT NULL,
   `tipodeContrato` varchar(50) NOT NULL,
-  `nomina` varchar(12) NOT NULL
+  `nomina` varchar(12) NOT NULL,
+  `idCargo` int(11) NOT NULL,
+  `tipoDocumento` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `empleados`
+-- Dumping data for table `empleados`
 --
 
-INSERT INTO `empleados` (`idEmpledo`, `nombreEmpleado`, `apellidoEmpleado`, `documentoEmpleado`, `telefonoEmpleado`, `rangoEmpleado`, `tipodeContrato`, `nomina`) VALUES
-(16, 'Juanin', 'Hanharry', 123456789, '3209876543', 'Obrero', 'Jornal', ''),
-(23, 'Astrid', 'Leon', 7540987, '3207890123', 'Cocinera', 'Indet', '300000'),
-(27, 'Juan', 'Holguín', 100657980, '3298768907', 'Obrero', 'Jornal', '');
+INSERT INTO `empleados` (`idEmpledo`, `nombreEmpleado`, `apellidoEmpleado`, `documentoEmpleado`, `telefonoEmpleado`, `tipodeContrato`, `nomina`, `idCargo`, `tipoDocumento`) VALUES
+(172, 'Jaime', 'Hanharry', 1002314269, '3207899876', 'Definido', '1000000000', 1, 'CC'),
+(173, 'Juanin', 'Hanharry', 1002314269, '3207899876', 'Indefinido', '1000000000', 1, 'CC'),
+(174, 'Hernán ', 'López', 1002314041, '3207899876', 'Definido', '1000000000', 1, 'CC'),
+(175, 'Hernán ', 'Holguín Peña', 1002314269, '3207899876', 'Definido', '1000000000', 1, 'CC'),
+(177, 'Astrid Briyecd', 'Holguín', 1002314041, '3207899876', 'Indefinido', '1000000000', 1, 'CC'),
+(178, 'Dennis Jessenia', 'Morato Quintero', 1002679326, '31232622253', 'Definido', '1300000', 3, 'CC'),
+(179, 'Ananias', 'Hanharry', 1002314897, '3207899876', 'Definido', '1000000000', 2, 'CC'),
+(180, 'Elias', 'Hanharry', 1002314269, '3207899876', 'Definido', '1000000000', 2, 'CC'),
+(181, 'Dylan ', 'Amaya', 1002314269, '3207899876', 'Definido', '1000000000', 1, 'CC');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ganado`
+-- Table structure for table `ganado`
 --
 
 CREATE TABLE `ganado` (
@@ -138,42 +165,38 @@ CREATE TABLE `ganado` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `ganado`
+-- Dumping data for table `ganado`
 --
 
 INSERT INTO `ganado` (`idRes`, `raza`, `colorRes`, `categoriaEdad`, `tipoNegocio`, `idSocio`, `marcaChapeta`, `estado`, `precioinicial`, `precioFinal`, `idPotrero`, `pesoInicial`, `pesoActual`, `pesoFinal`, `vacunaAftosa`, `vecesAplicada`, `tratamiento`) VALUES
-(10, 'Cebú', 'Amarillo', 'Novillo', 'Sí', 19, 'No tiene', 'Criando', '12345678', '0', 17, '500 kg', '700 kg', '0', '2022-11-10', '1', 'tratamiento/Char&Laura.jpg'),
-(12, 'Barcino', 'Gris', 'Cebón', 'Sí', 20, 'No tiene', 'Criando', '500000', '0', 16, '500 kg', '800 kg', '00', '2022-11-12', '3', 'tratamiento/Char&Laura.jpg'),
-(15, 'Cebú', 'Marrón', 'Ternero', 'Sí', 19, '5677', 'Criando', '500000', '0000', 15, '', '', '', '0000-00-00', '', ''),
-(18, '', '', '...', '...', 26, '', '...', '', '', 22, '', '', '', '0000-00-00', '', ''),
-(19, 'Normando', 'Blanco', 'Novillo', 'No', 26, 'O09I1234', 'Vendido', '500000', '0', 22, '', '', '', '0000-00-00', '', '');
+(49, 'Cebú', 'Amarillo', 'Ternero', 'No', 83, '1234 AS45', 'Criando', '500000', '0000', 15, '', '', '', '0000-00-00', '', ''),
+(50, 'Cebú', 'Amarillo', 'Ternero', 'Sí', 83, '', 'Criando', '1234567', '999', 15, '', '', '', '0000-00-00', '', '');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `herramientas`
+-- Table structure for table `herramientas`
 --
 
 CREATE TABLE `herramientas` (
   `idHerramienta` int(11) NOT NULL,
   `nombreHerramienta` varchar(50) NOT NULL,
-  `cantidad` int(11) NOT NULL
+  `cantidad` int(11) NOT NULL,
+  `novedades` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `herramientas`
+-- Dumping data for table `herramientas`
 --
 
-INSERT INTO `herramientas` (`idHerramienta`, `nombreHerramienta`, `cantidad`) VALUES
-(9, 'Palas', 14),
-(11, 'Guadañas', 6),
-(12, 'Peinillas', 12),
-(14, 'Barras', 6);
+INSERT INTO `herramientas` (`idHerramienta`, `nombreHerramienta`, `cantidad`, `novedades`) VALUES
+(17, 'Pica', 17, 'En buen estado'),
+(18, 'Palas', 6, 'Sin novedades');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `insumos`
+-- Table structure for table `insumos`
 --
 
 CREATE TABLE `insumos` (
@@ -181,22 +204,21 @@ CREATE TABLE `insumos` (
   `nombreInsumo` varchar(50) NOT NULL,
   `cantidadInsumo` int(50) NOT NULL,
   `fechavencimiento` date NOT NULL,
-  `valorUnidad` int(50) NOT NULL
+  `valorUnidad` int(50) NOT NULL,
+  `novedades` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `insumos`
+-- Dumping data for table `insumos`
 --
 
-INSERT INTO `insumos` (`idInsumo`, `nombreInsumo`, `cantidadInsumo`, `fechavencimiento`, `valorUnidad`) VALUES
-(7, 'Vacunas Aftosa', 20, '2022-11-25', 10000),
-(8, 'Concentrado', 21, '2022-11-19', 13000),
-(11, 'Silo', 3, '2022-11-19', 20000);
+INSERT INTO `insumos` (`idInsumo`, `nombreInsumo`, `cantidadInsumo`, `fechavencimiento`, `valorUnidad`, `novedades`) VALUES
+(23, 'Concentrado', 13, '2023-04-12', 12900, 'Fecha proxima a caducar');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `potrero`
+-- Table structure for table `potrero`
 --
 
 CREATE TABLE `potrero` (
@@ -207,20 +229,17 @@ CREATE TABLE `potrero` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `potrero`
+-- Dumping data for table `potrero`
 --
 
 INSERT INTO `potrero` (`idPotrero`, `nombrePotrero`, `estadoPotrero`, `medida`) VALUES
 (15, 'Potrero #1', 'Disponible', '100 m^2'),
-(16, 'Potrero #2', 'Disponible', '100 m^2'),
-(17, 'Potrero #3', 'Disponible', '100 m^2'),
-(21, 'Potrero #4', 'Mantenimiento', '50 m^2'),
-(22, '...', 'Disponible', '');
+(38, 'Potrero #2', 'Disponible', '100 m2');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `socios`
+-- Table structure for table `socios`
 --
 
 CREATE TABLE `socios` (
@@ -229,38 +248,37 @@ CREATE TABLE `socios` (
   `apellidoSocio` varchar(50) NOT NULL,
   `documentoSocio` int(50) NOT NULL,
   `telefonoSocio` varchar(50) NOT NULL,
-  `marca` varchar(11) NOT NULL
+  `marca` varchar(11) NOT NULL,
+  `tipoDocumento` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `socios`
+-- Dumping data for table `socios`
 --
 
-INSERT INTO `socios` (`idSocio`, `nombreSocio`, `apellidoSocio`, `documentoSocio`, `telefonoSocio`, `marca`) VALUES
-(19, 'José', 'López', 7658907, '3457891087', 'A1Y3'),
-(20, 'Yesid', 'Ramirez', 987500000, '3457891087', 'B5U7'),
-(25, 'Brayam', 'Morales', 198707856, '', 'BM25'),
-(26, '', '', 0, '', '...');
+INSERT INTO `socios` (`idSocio`, `nombreSocio`, `apellidoSocio`, `documentoSocio`, `telefonoSocio`, `marca`, `tipoDocumento`) VALUES
+(83, '', '', 0, '', 'No', 'CC'),
+(92, 'Gustavo', 'Cerati', 7658907, '3457890987', 'BE83', 'CC');
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `actividades`
+-- Indexes for table `actividades`
 --
 ALTER TABLE `actividades`
   ADD PRIMARY KEY (`idAct`),
   ADD UNIQUE KEY `nombreActividad` (`nombreActividad`);
 
 --
--- Indices de la tabla `administrador`
+-- Indexes for table `administrador`
 --
 ALTER TABLE `administrador`
   ADD PRIMARY KEY (`idAdmin`);
 
 --
--- Indices de la tabla `agenda`
+-- Indexes for table `agenda`
 --
 ALTER TABLE `agenda`
   ADD PRIMARY KEY (`idActividad`),
@@ -268,14 +286,20 @@ ALTER TABLE `agenda`
   ADD KEY `nombreActividad` (`idAct`);
 
 --
--- Indices de la tabla `empleados`
+-- Indexes for table `car`
+--
+ALTER TABLE `car`
+  ADD PRIMARY KEY (`idCargo`);
+
+--
+-- Indexes for table `empleados`
 --
 ALTER TABLE `empleados`
   ADD PRIMARY KEY (`idEmpledo`),
-  ADD UNIQUE KEY `nombreEmpleado` (`nombreEmpleado`);
+  ADD KEY `idCargo` (`idCargo`);
 
 --
--- Indices de la tabla `ganado`
+-- Indexes for table `ganado`
 --
 ALTER TABLE `ganado`
   ADD PRIMARY KEY (`idRes`),
@@ -283,102 +307,114 @@ ALTER TABLE `ganado`
   ADD KEY `nombrePotrero` (`idPotrero`);
 
 --
--- Indices de la tabla `herramientas`
+-- Indexes for table `herramientas`
 --
 ALTER TABLE `herramientas`
   ADD PRIMARY KEY (`idHerramienta`);
 
 --
--- Indices de la tabla `insumos`
+-- Indexes for table `insumos`
 --
 ALTER TABLE `insumos`
   ADD PRIMARY KEY (`idInsumo`);
 
 --
--- Indices de la tabla `potrero`
+-- Indexes for table `potrero`
 --
 ALTER TABLE `potrero`
   ADD PRIMARY KEY (`idPotrero`),
   ADD UNIQUE KEY `nombrePotrero` (`nombrePotrero`);
 
 --
--- Indices de la tabla `socios`
+-- Indexes for table `socios`
 --
 ALTER TABLE `socios`
   ADD PRIMARY KEY (`idSocio`),
   ADD UNIQUE KEY `marca` (`marca`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `actividades`
+-- AUTO_INCREMENT for table `actividades`
 --
 ALTER TABLE `actividades`
-  MODIFY `idAct` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `idAct` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT de la tabla `administrador`
+-- AUTO_INCREMENT for table `administrador`
 --
 ALTER TABLE `administrador`
   MODIFY `idAdmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla `agenda`
+-- AUTO_INCREMENT for table `agenda`
 --
 ALTER TABLE `agenda`
-  MODIFY `idActividad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `idActividad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
--- AUTO_INCREMENT de la tabla `empleados`
+-- AUTO_INCREMENT for table `car`
+--
+ALTER TABLE `car`
+  MODIFY `idCargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `idEmpledo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `idEmpledo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
 
 --
--- AUTO_INCREMENT de la tabla `ganado`
+-- AUTO_INCREMENT for table `ganado`
 --
 ALTER TABLE `ganado`
-  MODIFY `idRes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `idRes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
--- AUTO_INCREMENT de la tabla `herramientas`
+-- AUTO_INCREMENT for table `herramientas`
 --
 ALTER TABLE `herramientas`
-  MODIFY `idHerramienta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `idHerramienta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT de la tabla `insumos`
+-- AUTO_INCREMENT for table `insumos`
 --
 ALTER TABLE `insumos`
-  MODIFY `idInsumo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idInsumo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT de la tabla `potrero`
+-- AUTO_INCREMENT for table `potrero`
 --
 ALTER TABLE `potrero`
-  MODIFY `idPotrero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `idPotrero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
--- AUTO_INCREMENT de la tabla `socios`
+-- AUTO_INCREMENT for table `socios`
 --
 ALTER TABLE `socios`
-  MODIFY `idSocio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `idSocio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `agenda`
+-- Constraints for table `agenda`
 --
 ALTER TABLE `agenda`
   ADD CONSTRAINT `agenda_ibfk_3` FOREIGN KEY (`idEmpledo`) REFERENCES `empleados` (`idEmpledo`) ON UPDATE CASCADE,
   ADD CONSTRAINT `agenda_ibfk_4` FOREIGN KEY (`idAct`) REFERENCES `actividades` (`idAct`) ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `ganado`
+-- Constraints for table `empleados`
+--
+ALTER TABLE `empleados`
+  ADD CONSTRAINT `empleados_ibfk_1` FOREIGN KEY (`idCargo`) REFERENCES `car` (`idCargo`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `ganado`
 --
 ALTER TABLE `ganado`
   ADD CONSTRAINT `ganado_ibfk_1` FOREIGN KEY (`idSocio`) REFERENCES `socios` (`idSocio`) ON UPDATE CASCADE,

@@ -37,13 +37,37 @@
 
     <body background="" class="text-white">
       
-
+    <div class="container">
+        <?php 
+        if(isset($_SESSION["registro"])){
+            
+            $registro = $_SESSION["registro"] ;
+            echo '<div class="alert alert-primary alert-dismissible fade show mt-5 bg-primary  bg-opacity-75 rounded" >
+           
+            <button class="btn-close text-white" type="button" data-bs-dismiss="alert"></button>
+            <label class="text-white"><i class="bi bi-exclamation-triangle"></i> '.$registro.'</label>
+            </div>';
+            unset($_SESSION["registro"]);
+        }
+        if(isset($_SESSION["Error"])){
+         
+            $Error = $_SESSION["Error"] ;
+            echo '<div class="alert alert-primary alert-dismissible fade show mt-5 bg-primary  bg-opacity-75 rounded" >
+           
+            <button class="btn-close text-white" type="button" data-bs-dismiss="alert"></button>
+            <label class="text-white"><i class="bi bi-exclamation-triangle"></i> '.$Error.'</label>
+            </div>';
+            unset($_SESSION["Error"]);
+        }
+        
+        ?>
+        </div>
         <div class="container mt-0" >
            <h1 class="text-center text-white p-4 p-3"> Actividades</h1>
            <form action="addAct.php" method="POST">
             <div class="input-group">
-            <input class="form-control text-white bg-success bg-opacity-75 border-0" type="text" id="nombreActividad" name="nombreActividad"  placeholder="Agregue una actividad">
-            <input class="form-control text-white bg-success bg-opacity-75 border-0" type="text" id="descripcion" name="descripcion"  placeholder="Descripción">
+            <input class="form-control text-white bg-success bg-opacity-75 border-0" type="text" id="nombreActividad" name="nombreActividad"  placeholder="Agregue una actividad" maxlength="15">
+            <input class="form-control text-white bg-success bg-opacity-75 border-0" type="text" id="descripcion" name="descripcion"  placeholder="Descripción" maxlength="300">
             <button   class="btn btn-primary me-2" type="submit">Añadir</button>
 
             </div>
@@ -82,20 +106,24 @@
             </div>
         </div>
         <script>
-        function listaActividad(id){
+    function listaActividad(id){
         var mensaje;
    
         if(confirm("¿Desea eliminar el registro?")){
             const xhttp = new XMLHttpRequest();
             xhttp.onload= function(){
-                document.getElementById("tabla").innerHTML = this.responseText;
-                alert('Se ha eliminado');
+                if (this.responseText === "No se puede eliminar la actividad porque está siendo utilizada.") {
+                    alert(this.responseText);
+                } else {
+                    document.getElementById("tabla").innerHTML = this.responseText;
+                    alert('Se ha eliminado');
+                }
             };
 
             xhttp.open("GET","borrarActividad.php?id="+id);
             xhttp.send();
         }  
     }
-        </script>
+</script>
     </body>
 </html>

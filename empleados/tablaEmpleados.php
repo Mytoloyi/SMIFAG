@@ -18,6 +18,10 @@
     <link rel="stylesheet" href="../css/custom.css">
     <script src="../js/bootstrap.bundle.min.js"></script>
     <link href ="../libs/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../js/DataTables-1.13.4/css/jquery.dataTables.min.css"><!-- nuevo: agregar id a la etiqueta tabla -->
+    <script src="../js/jquery-3.6.1.min.js"></script><!-- nuevo -->
+    <script src="../js/datatables.min.js"></script><!-- nuevo -->
     <style>
     img{
       width: 100%;
@@ -34,19 +38,19 @@
     </head>
 
     <body background="" class="text-white">
-        <div class="container mt-0" >
+        <div class="container mt-0 " >
            <h1 class="text-center text-white p-4 p-3"> Lista de Empleados</h1>
           
             <div class="row">
 
             <div class="col overflow-auto">
-            <form action="" >
+            <!-- <form action="" >
             <div class="input-group">
-            <input class="form-control text-white bg-success bg-opacity-75 border-0" type="text" id="buscar" name="buscar" onkeyup="buscarEmpleados()" placeholder="Buscar empleado">
+            <input class="form-control text-white bg-success bg-opacity-75 border-0 buscar" type="text" id="buscar" name="buscar" onkeyup="buscarEmpleados()" placeholder="Buscar empleado">
             <a type="submit" name="buscado" class="btn btn-primary " onclick="buscarEmpleados()" >Buscar</a>
             </div>
-            </form>
-            <table class="table bg-primary bg-opacity-75 text-light" >
+            </form> -->
+            <table class="table bg-primary bg-opacity-75 text-light" id="tabla-Empleados" >
             <thead class="text-center bg-success">
                 <td>Id</td>
                 <td>Nombres</td>
@@ -55,7 +59,7 @@
                 <td>Teléfono</td>
                 <td>Cargo</td>
                 <td>Tipo de contrato</td>
-                <td>Nomina</td>
+                <td>Sueldo</td>
                 <td></td>
                 <td></td>
             </thead>
@@ -80,18 +84,42 @@
                 </div>
             </div>
         </div>
+        <script src="../admin/controller/goback.js"></script>
         <script>
-        function buscarEmpleados(){
-            var mensaje;
-            var consulta = document.getElementById("buscar").value;
-            const xhttp = new XMLHttpRequest();
-            xhttp.onload= function(){
-                document.getElementById("tabla").innerHTML = this.responseText;
-            };
-
-            xhttp.open("GET","buscarEmpleados.php?consulta="+consulta);
-            xhttp.send();
-        }
+        $(document).ready(function() {
+            $('#tabla-Empleados').DataTable({
+                paging: true,
+                ordering: true,
+                info: true,
+                language:{
+                    "decimal":        "",
+                    "emptyTable":     "No hay datos en la tabla",
+                    "info":           "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty":      "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered":   "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix":    "",
+                    "thousands":      ",",
+                    "lengthMenu":     "Filtrar _MENU_",
+                    "loadingRecords": "Cargando...",
+                    "processing":     "",
+                    "search":         "Buscar: ",
+                    "zeroRecords":    "No se han encontrado resultados",
+                    "paginate": {
+                        "first":      "Primero",
+                        "last":       "Ultimo",
+                        "next":       "",
+                        "previous":   ""
+                    },
+                    "aria": {
+                        "sortAscending":  ": activate to sort column ascending",
+                        "sortDescending": ": activate to sort column descending"
+                    }
+                }, 
+                "lengthMenu":[5, 10, 20 ]
+                
+            });
+        });
+        
         </script>
     </body>
 </html>

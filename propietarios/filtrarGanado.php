@@ -5,16 +5,17 @@ include 'conexion.php';
 $where= "";
 if(!empty($_GET)){
     $valor= $_GET['consulta'];
-    if(!empty($valor)){
-        $where = "WHERE nombreSocio LIKE '%$valor%'
-        or apellidoSocio LIKE '%$valor%' 
-        or marca LIKE '%$valor%' 
-        or marcaChapeta LIKE '%$valor%'
-        or raza LIKE '%$valor%'
-        or colorRes LIKE '%$valor%'
-        or categoriaEdad LIKE '%$valor%'
-        
-        ";
+    if (!empty($valor)) {
+        $where = "WHERE (nombreSocio LIKE '%$valor%'
+                   OR apellidoSocio LIKE '%$valor%'
+                   OR marca LIKE '%$valor%'
+                   OR marcaChapeta LIKE '%$valor%'
+                   OR raza LIKE '%$valor%'
+                   OR colorRes LIKE '%$valor%'
+                   OR categoriaEdad LIKE '%$valor%')
+                  AND estado = 'Criando'";
+    } else {
+        $where = "WHERE estado = 'Criando'";
     }
 } 
 

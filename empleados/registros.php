@@ -11,17 +11,17 @@
             $password="";
             $database="finca_ganadera";
             $con= new mysqli($servidor,$user,$password,$database);
-            $sql="SELECT * FROM empleados ORDER BY nombreEmpleado ASC LIMIT 10";
+            $sql="SELECT * FROM empleados INNER JOIN car ON empleados.idCargo = car.idCargo ORDER BY nombreEmpleado ASC LIMIT 10";
             $resultset = $con->query($sql);
             
                 while($fila = $resultset->fetch_assoc()){
                     echo "<tr>
                     <td>".$fila["idEmpledo"]."</td>
                     <td>".$fila["nombreEmpleado"]."</td>
-                    <td>".$fila["apellidoEmpleado"]."</td> 
-                    <td>".$fila["documentoEmpleado"]."</td> 
+                    <td>".$fila["apellidoEmpleado"]."</td>
+                    <td>".$fila["tipoDocumento"]." ".$fila["documentoEmpleado"]."</td> 
                     <td>".$fila["telefonoEmpleado"]."</td> 
-                    <td>".$fila["rangoEmpleado"]."</td> 
+                    <td>".$fila["cargo"]."</td> 
                     <td>".$fila["tipodeContrato"]."</td>
                     <td>".$fila["nomina"]."</td>  
                     <td class='text-end pe-4 ps-4'> 
@@ -40,22 +40,22 @@
 
 
 <script>
-    //EMPLEADOS
     function listaEmpleados(id){
         var mensaje;
    
         if(confirm("¿Desea eliminar el registro?")){
             const xhttp = new XMLHttpRequest();
             xhttp.onload= function(){
-                document.getElementById("tabla").innerHTML = this.responseText;
-                alert('Se ha eliminado');
+                if (this.responseText === "No se puede eliminar el empleado porque está siendo utilizado en la agenda.") {
+                    alert(this.responseText);
+                } else {
+                    document.getElementById("tabla").innerHTML = this.responseText;
+                    alert('Se ha eliminado');
+                }
             };
 
             xhttp.open("GET","eliminarEmpleados.php?id="+id);
             xhttp.send();
         }  
     }
-
- 
-   
 </script>

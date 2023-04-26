@@ -66,7 +66,7 @@
                 <div class="form-floating m-4 mt-2 ">
                 <input type="hidden" name="id" id="id" value="<?php echo $dato['idRes'];?>">
                     <input type="text" class="form-control bg-primary bg-opacity-50 text-white" 
-                    id="raza" name="raza" value="<?php echo $dato['raza'];?>">
+                    id="raza" name="raza" value="<?php echo $dato['raza'];?>" maxlength="12">
                     <label for="raza"><i class="bi bi--fill"></i> Raza:</label>
                 </div> 
                
@@ -74,26 +74,26 @@
                 
                 <div class="form-floating m-4 mt-2 ">
                     <input type="text" class="form-control bg-primary bg-opacity-50 text-white" 
-                    id="colorRes" name="colorRes" value="<?php echo $dato['colorRes'];?>">
+                    id="colorRes" name="colorRes" value="<?php echo $dato['colorRes'];?>" maxlength="12">
                     <label for="colorRes"><i class="bi bi--fill"></i> Color:</label>
                 </div>
 
 
                 <div class="form-floating m-4 mt-2 ">
                     <input type="text" class="form-control bg-primary bg-opacity-50 text-white" 
-                    id="marcaChapeta" name="marcaChapeta" value="<?php echo $dato['marcaChapeta'];?>">
+                    id="marcaChapeta" name="marcaChapeta" value="<?php echo $dato['marcaChapeta'];?>" maxlength="8">
                     <label for="marcaChapeta"><i class="bi bi--fill"></i> Número de chapeta o tatuaje del animal: </label>
                 </div>
 
                 <div class="form-floating m-4 mt-2 ">
                     <input type="text" class="form-control bg-primary bg-opacity-50 text-white" 
-                    id="precoinicial" name="precioinicial" value="<?php echo $dato['precioinicial'];?>">
+                    id="precioinicial" name="precioinicial" value="<?php echo $dato['precioinicial'];?>" maxlength="7">
                     <label for="precioinicial"><i class="bi bi--fill"></i> Precio Inicial:</label>
                 </div>
 
                 <div class="form-floating m-4 mt-2 ">
                     <input type="text" class="form-control bg-primary bg-opacity-50 text-white" 
-                    id="precioFinal" name="precioFinal" value="<?php echo $dato['precioFinal'];?>">
+                    id="precioFinal" name="precioFinal" value="<?php echo $dato['precioFinal'];?>" maxlength="7">
                     <label for="precioFinal"><i class="bi bi--fill"></i> Precio Final:</label>
                 </div>
 
@@ -182,6 +182,6 @@
             
             </form>
         </div>
-
+        <script src="alertas.js"></script>
     </body>
 </html>

@@ -62,19 +62,23 @@ if(!isset($_SESSION ["Usuario"])){
             <div class="form-floating m-4 mt-2">
             <input type="hidden" name="id" id="id" value="<?php echo $dato['idPotrero'];?>">
                 <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="nombrePotrero"
-                placeholder="Nombre" name="nombrePotrero" value="<?php echo $dato['nombrePotrero'];?>">
+                placeholder="Nombre" name="nombrePotrero" value="<?php echo $dato['nombrePotrero'];?>" maxlength="10">
                 <label for="nombrePotrero"><i class="bi bi"></i> Nombre del Potrero:</label>
             </div>
 
-            <div class="form-floating m-4 mt-2">
-                <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="estadoPotrero"
-                placeholder="estado" name="estadoPotrero" value="<?php echo $dato['estadoPotrero'];?>">
-                <label for="estado"><i class="bi bi"></i> Estado:</label>
+            <div class="input-group mb-4 mt-2 ms-4 pe-5">
+                <span class="input-group-text bg-primary bg-opacity-75 text-white"><i class="bi bi--fill"></i>Estado:</span>
+                <select class="form-select bg-primary bg-opacity-50 text-white" name="estadoPotrero" id="estadoPotrero">
+                    <option ><?php echo $dato['estadoPotrero'];?></option>
+                    <option >Disponible</option>
+                    <option >Lleno</option>
+                    <option >En mantenimiento</option>
+                </select>
             </div>
 
             <div class="form-floating m-4 mt-2">
                 <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="medida"
-                placeholder="medida" name="medida" value="<?php echo $dato['medida'];?>">
+                placeholder="medida" name="medida" value="<?php echo $dato['medida'];?>" maxlength="12">
                 <label for="medida"><i class="bi bi"></i> Medida:</label>
             </div>
          
@@ -89,6 +93,7 @@ if(!isset($_SESSION ["Usuario"])){
             </form>
         </div>
         <script src="../admin/controller/goback.js" ></script>
+        <script src="alertas.js" ></script>
 
     </body>
 </html>

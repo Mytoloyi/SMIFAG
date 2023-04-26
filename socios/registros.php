@@ -21,7 +21,7 @@
                     <td>".$fila["idSocio"]."</td>
                     <td>".$fila["nombreSocio"]."</td>
                     <td>".$fila["apellidoSocio"]."</td> 
-                    <td>".$fila["documentoSocio"]."</td> 
+                    <td>".$fila["tipoDocumento"]." ".$fila["documentoSocio"]."</td> 
                     <td>".$fila["telefonoSocio"]."</td> 
                     <td>".$fila["marca"]."</td> 
                     <td class='text-end pe-4 ps-4'> 
@@ -40,19 +40,22 @@
 <script>
  
     //SOCIOS
-    function listaSocios(id){
-        var mensaje;
-   
-        if(confirm("¿Desea eliminar el registro?")){
-            const xhttp = new XMLHttpRequest();
-            xhttp.onload= function(){
-                document.getElementById("tabla").innerHTML = this.responseText;
-                alert('Se ha eliminado');
-            };
+function listaSocios(id){
+    var mensaje;
 
-            xhttp.open("GET","eliminarSocios.php?id="+id);
-            xhttp.send();
-        }  
-    }
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload= function(){
+        if (this.responseText === "No se puede eliminar el socio porque está siendo utilizado en la tabla ganado.") {
+            alert(this.responseText);
+        } else {
+            document.getElementById("tabla").innerHTML = this.responseText;
+            alert('Se ha eliminado');
+        }
+    };
+
+    // Verificar si el registro se está utilizando en la tabla ganado
+    xhttp.open("GET","eliminarSocios.php?id="+id);
+    xhttp.send();
+}
 
 </script>

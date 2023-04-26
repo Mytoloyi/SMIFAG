@@ -28,7 +28,8 @@ if($resultset->num_rows>0){
     <td>".$fila["nombreInsumo"]."</td> 
     <td>".$fila["cantidadInsumo"]."</td>
     <td>".$fila["fechavencimiento"]."</td> 
-    <td>".$fila["valorUnidad"]."</td> 
+    <td>".$fila["valorUnidad"]."</td>
+    <td>".$fila["novedades"]."</td> 
     <td class='text-end pe-4 ps-4'> 
     <a class='btn btn-success' href='editarInsumos.php?id=".$fila["idInsumo"]."' > <i class='bi bi-pencil'></i> </a> 
     </td>

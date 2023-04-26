@@ -17,6 +17,10 @@
     <link rel="stylesheet" href="../css/custom.css">
     <script src="../js/bootstrap.bundle.min.js"></script>
     <link href ="../libs/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../js/DataTables-1.13.4/css/jquery.dataTables.min.css"><!-- nuevo: agregar id a la etiqueta tabla -->
+    <script src="../js/jquery-3.6.1.min.js"></script><!-- nuevo -->
+    <script src="../js/datatables.min.js"></script><!-- nuevo -->
     <style>
     img{
       width: 100%;
@@ -37,48 +41,86 @@
 
         <div class="container mt-0" >
            <h1 class="text-center text-white p-4 p-3"> Lista de Herramientas</h1>
-           <form action="" >
+           <!-- <form action="" >
             <div class="input-group">
             <input class="form-control text-white bg-success bg-opacity-75 border-0" type="text" id="buscar" name="buscar" onkeyup="buscarHerramientas()" placeholder="Buscar potrero">
             <a type="submit" name="buscado" class="btn btn-primary " onclick="buscarHerramientas()" >Buscar</a>
             </div>
-            </form>
-           <table class="table bg-primary bg-opacity-75 text-light" >
-           <thead class="text-center bg-success">
-                <td>Id</td>
-                <td>Nombre</td>
-                <td>Cantidad</td>
-                <td></td>
-                <td></td>
-              
-            </thead>
-            <tbody id="tabla" class="text-center">
-            <?php
-                include 'registros.php';
-                $conexion = new Conectar();
-                $conexion->listaHerramientas();
-            ?>
-            </tbody>
-           </table>
-          
+            </form> -->
+            <div class="row">
+                <div class="col overflow-auto">
+                    <table class="table bg-primary bg-opacity-75 text-light" id="tabla-herramientas">
+                    <thead class="text-center bg-success">
+                            <td>Id</td>
+                            <td>Nombre</td>
+                            <td>Cantidad</td>
+                            <td>Novedades</td>
+                            <td></td>
+                            <td></td>
+                        
+                        </thead>
+                        <tbody id="tabla"  class="text-center">
+                        <?php
+                            include 'registros.php';
+                            $conexion = new Conectar();
+                            $conexion->listaHerramientas();
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             <div class="text-center">
                 <div class="btn-group">
                 <a  class="btn btn-primary ms-2"   href="http://localhost/prototiposmifag/admin/tablas.php" > <i class="bi bi-box-arrow-in-left">Volver </i></a>
                 </div>
             </div>
         </div>
+        <script src="../admin/controller/goback.js"></script>
         <script>
-        function buscarHerramientas(){
-            var mensaje;
-            var consulta = document.getElementById("buscar").value;
-            const xhttp = new XMLHttpRequest();
-            xhttp.onload= function(){
-                document.getElementById("tabla").innerHTML = this.responseText;
-            };
+            $(document).ready(function() {
+            $('#tabla-herramientas').DataTable({
+                paging: true,
+                ordering: true,
+                info: true,
+                language:{
+                    "decimal":        "",
+                    "emptyTable":     "No hay datos en la tabla",
+                    "info":           "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty":      "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered":   "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix":    "",
+                    "thousands":      ",",
+                    "lengthMenu":     "Filtrar _MENU_",
+                    "loadingRecords": "Cargando...",
+                    "processing":     "",
+                    "search":         "Buscar: ",
+                    "zeroRecords":    "No se han encontrado resultados",
+                    "paginate": {
+                        "first":      "Primero",
+                        "last":       "Ultimo",
+                        "next":       "",
+                        "previous":   ""
+                    },
+                    "aria": {
+                        "sortAscending":  ": activate to sort column ascending",
+                        "sortDescending": ": activate to sort column descending"
+                    }
+                }, 
+                "lengthMenu":[5, 10, 20 ]
+                
+            });
+        });
+        // function buscarHerramientas(){
+            // var mensaje;
+            // var consulta = document.getElementById("buscar").value;
+            // const xhttp = new XMLHttpRequest();
+            // xhttp.onload= function(){
+            //     document.getElementById("tabla").innerHTML = this.responseText;
+            // };
 
-            xhttp.open("GET","buscarHerramientas.php?consulta="+consulta);
-            xhttp.send();
-        }
+            // xhttp.open("GET","buscarHerramientas.php?consulta="+consulta);
+            // xhttp.send();
+        // }
         </script>
     </body>
 </html>

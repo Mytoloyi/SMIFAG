@@ -98,7 +98,7 @@
        
         <div class="text-center">
               <div class="btn-group">
-                   <a  class="btn btn-primary ms-2"  style="width:200px;" href="../admin/tablas.php" > <i class="bi bi-wrench-adjustable-circle-fill"> Administrar </i></a>
+                   <a  class="btn btn-primary ms-2"  style="width:200px;" href="../ganado/tablaGanado.php" > <i class="bi bi-wrench-adjustable-circle-fill"> Administrar </i></a>
                    <a  class="btn btn-primary ms-2" style="width:200px;"  href="http://localhost/prototiposmifag/admin/gestor.php" > <i class="bi bi-box-arrow-in-left">Volver </i></a>
                 </div>
             </div>

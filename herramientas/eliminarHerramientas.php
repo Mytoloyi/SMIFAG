@@ -25,6 +25,7 @@ if($resultset->num_rows>0){
     <td>".$fila["idHerramienta"]."</td>
     <td>".$fila["nombreHerramienta"]."</td> 
     <td>".$fila["cantidad"]."</td>
+    <td>".$fila["novedades"]."</td>
     <td class='text-end pe-4 ps-4'> 
         <a class='btn btn-success' href='editarHerramientas.php?id=".$fila["idHerramienta"]."' > <i class='bi bi-pencil'></i> </a> 
     </td>

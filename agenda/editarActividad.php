@@ -72,7 +72,7 @@
             </div>
                 <div class="form-floating m-4 mt-2">
                 <input type="date" class="form-control bg-primary bg-opacity-50 text-white" id="fecha"
-                placeholder="Fecha" name="fecha" value="<?php echo $dato['fecha'];?>">
+                placeholder="Fecha" name="fecha" value="<?php echo $dato['fecha'];?>" min="<?php echo date('Y-m-d'); ?>">
                 <label for="fecha"><i class="bi bi--fill"></i> Fecha: </label>
             </div>
                

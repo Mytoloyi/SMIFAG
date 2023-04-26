@@ -113,7 +113,8 @@
             </div>
            
             <div class="text-center">
-                   <a  class="btn btn-primary ms-2"  style="width:200px;" href="../admin/tablas.php" > <i class="bi bi-wrench-adjustable-circle-fill"> Administrar </i></a>
+                   <a  class="btn btn-primary ms-2"  style="width:200px;" href="../insumos/tablaInsumos.php" > <i class="bi bi-wrench-adjustable-circle-fill"> Insumos </i></a>
+                   <a  class="btn btn-primary ms-2"  style="width:200px;" href="../herramientas/tablaHerramientas.php" > <i class="bi bi-wrench-adjustable-circle-fill"> Herramientas </i></a>
                    <a  class="btn btn-primary ms-2" style="width:200px;"  href="http://localhost/prototiposmifag/admin/gestor.php" > <i class="bi bi-box-arrow-in-left">Volver </i></a>
                 </div>
 

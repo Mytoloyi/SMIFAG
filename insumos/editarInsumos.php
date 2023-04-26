@@ -18,10 +18,11 @@ if(!isset($_SESSION ["Usuario"])){
       $cantidad=$con->real_escape_string($_POST['cantidadInsumo']);
       $fechavencimiento=$con->real_escape_string($_POST['fechavencimiento']);
       $valor=$con->real_escape_string($_POST['valorUnidad']);
+      $novedades=$con->real_escape_string($_POST['novedades']);
       
 
 
-      $actualiza="UPDATE insumos SET nombreInsumo='$nombre', cantidadInsumo='$cantidad', fechavencimiento='$fechavencimiento', valorUnidad='$valor' WHERE idInsumo='$id'";
+      $actualiza="UPDATE insumos SET nombreInsumo='$nombre', cantidadInsumo='$cantidad', fechavencimiento='$fechavencimiento', valorUnidad='$valor', novedades='$novedades' WHERE idInsumo='$id'";
       
       $actualizar= $con->query($actualiza);
       header("location: tablaInsumos.php");
@@ -63,27 +64,31 @@ if(!isset($_SESSION ["Usuario"])){
             <div class="form-floating m-4 mt-2">
             <input type="hidden" name="id" id="id" value="<?php echo $dato['idInsumo'];?>">
                 <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="nombreInsumo"
-                placeholder="Nombre" name="nombreInsumo" value="<?php echo $dato['nombreInsumo'];?>">
+                placeholder="Nombre" name="nombreInsumo" value="<?php echo $dato['nombreInsumo'];?>" maxlength="20">
                 <label for="nombreInsumo"><i class="bi bi"></i> Nombre del Insumo:</label>
             </div>
 
             <div class="form-floating m-4 mt-2">
                 <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="cantidadInsumo"
-                placeholder="Cantidad" name="cantidadInsumo" value="<?php echo $dato['cantidadInsumo'];?>">
+                placeholder="Cantidad" name="cantidadInsumo" value="<?php echo $dato['cantidadInsumo'];?>" maxlength="3">
                 <label for="cantidadInsumo"><i class="bi bi"></i> Cantidad:</label>
             </div>
 
             <div class="form-floating m-4 mt-2">
                 <input type="date" class="form-control bg-primary bg-opacity-50 text-white" id="fechavencimiento"
-                placeholder="Fecha" name="fechavencimiento" value="<?php echo $dato['fechavencimiento'];?>">
+                placeholder="Fecha" name="fechavencimiento" value="<?php echo $dato['fechavencimiento'];?>" min="<?php echo date('Y-m-d'); ?>">
                 <label for="fechavencimiento"><i class="bi bi"></i> Fecha de vencimiento:</label>
             </div>
             <div class="form-floating m-4 mt-2">
                 <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="valorUnidad"
-                placeholder="Valor" name="valorUnidad" value="<?php echo $dato['valorUnidad'];?>">
+                placeholder="Valor" name="valorUnidad" value="<?php echo $dato['valorUnidad'];?>" maxlength="7">
                 <label for="valorUnidad"><i class="bi bi"></i> Valor Unidad:</label>
             </div>
-         
+            <div class="form-floating m-4 mt-2">
+                <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="novedades"
+                placeholder="Novedades" name="novedades" value="<?php echo $dato['novedades'];?>" maxlength="300">
+                <label for="novedades" class="text-white"><i class="bi bi"></i> Novedades:</label>
+            </div>
 
            
             <div class=" ps-4 pe-4 d-grid">

@@ -3,7 +3,7 @@ include 'conexion.php';
 
 $where= "";
 if(!empty($_GET)){
-    $valor= $_GET['consulta'];
+    $valor= $_GET['busqueda'];
     if(!empty($valor)){
         $where= "WHERE nombreInsumo LIKE '%$valor%' 
         or cantidadInsumo LIKE '%$valor%'

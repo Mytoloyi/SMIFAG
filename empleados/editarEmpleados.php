@@ -9,7 +9,7 @@ if(!isset($_SESSION ["Usuario"])){
     $con = $conectar -> conectarDB();
 
     $id= $_GET['id'];
-    $sql="SELECT * FROM empleados WHERE idEmpledo='$id' ";
+    $sql="SELECT * FROM empleados INNER JOIN car ON empleados.idCargo = car.idCargo WHERE idEmpledo='$id' ";
     $modificar= $con->query($sql);
     $dato= $modificar->fetch_array();
 
@@ -19,12 +19,13 @@ if(!isset($_SESSION ["Usuario"])){
         $apellido=$con->real_escape_string($_POST['apellidoEmpleado']);
         $documento=$con->real_escape_string($_POST['documentoEmpleado']);
         $telefono=$con->real_escape_string($_POST['telefonoEmpleado']);
-        $rango=$con->real_escape_string($_POST['rangoEmpleado']);
         $contrato=$con->real_escape_string($_POST['tipodeContrato']);
         $nomina=$con->real_escape_string($_POST['nomina']);
+        $cargo=$con->real_escape_string($_POST['cargo']);
+        $tipoDocumento=$con->real_escape_string($_POST['tipoDocumento']);
 
 
-        $actualiza="UPDATE empleados SET nombreEmpleado='$nombre', apellidoEmpleado='$apellido', documentoEmpleado='$documento', telefonoEmpleado='$telefono', rangoEmpleado='$rango', tipodeContrato='$contrato', nomina='$nomina' WHERE idEmpledo='$id'";
+        $actualiza="UPDATE empleados SET nombreEmpleado='$nombre', apellidoEmpleado='$apellido', documentoEmpleado='$documento', telefonoEmpleado='$telefono', tipodeContrato='$contrato', nomina='$nomina', idcargo='$cargo', tipoDocumento='$tipoDocumento' WHERE idEmpledo='$id'";
         
         $actualizar= $con->query($actualiza);
         header("location: tablaEmpleados.php");
@@ -64,47 +65,78 @@ if(!isset($_SESSION ["Usuario"])){
         <h1 class="text-center text-white">Modificar  registros de empleados</h1>
             <form action="<?php echo $_SERVER['PHP_SELF']?>" class="p-2"  method="POST">
             <input type="hidden" name="id" id="id" value="<?php echo $dato['idEmpledo'];?>">
-            <div class="input-group  pe-5 m-4 mt-2">
-                <span class="input-group-text bg-primary bg-opacity-75 text-white"i class="bi bi-person-fill"></i>Nombre del Empleado:&nbsp;</span>
-                <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="nombreEmpleado"
-                 name="nombreEmpleado" value="<?php echo $dato['nombreEmpleado'];?>">
-            </div>
+<!--Inicio -->  <div class="row">
+                    <div class="col">
+                                    <div class="form-floating mb-4 ">
+                                        <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="nombreEmpleado"
+                                        placeholder="Nombre" name="nombreEmpleado" value="<?php echo $dato['nombreEmpleado'];?>" maxlength="25">
+                                        <label for="nombreEmpleado" class="text-white"><i class="bi bi-person-fill"></i> Nombre del Empleado:</label>
+                                    </div>
 
-            <div class="input-group  pe-5 m-4 mt-2">
-            <span class="input-group-text bg-primary bg-opacity-75 text-white"i class="bi bi-person-fill"></i>Apellido del Empleado:&nbsp;</span>
-                <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="apellidoEmpleado"
-                 name="apellidoEmpleado" value="<?php echo $dato['apellidoEmpleado'];?>">
-            </div>
+                                    <div class="form-floating  mb-4 ">
+                                        <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="apellidoEmpleado"
+                                        placeholder="Apellido" name="apellidoEmpleado" value="<?php echo $dato['apellidoEmpleado'];?>" maxlength="25">
+                                        <label for="apellidoEmpleado"class="text-white"><i class="bi bi-person-fill"></i> Apellido del Empleado:</label>
+                                    </div>
 
-            <div class="input-group  pe-5 m-4 mt-2">
-            <span class="input-group-text bg-primary bg-opacity-75 text-white"i class="bi bi-person-fill"></i>No. de Documento:&nbsp;</span>
-                <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="documentoEmpleado"
-                 name="documentoEmpleado" value="<?php echo $dato['documentoEmpleado'];?>">
-            </div>
+                                        <div class="form-floating mb-4 ">
+                                            <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="documentoEmpleado"
+                                            placeholder="No. Documento" name="documentoEmpleado" value="<?php echo $dato['documentoEmpleado'];?>" maxlength="12">
+                                            <label for="documentoEmpleado" class="text-white"><i class="bi bi-person-fill"></i> No. documento del Empleado:</label>
+                                        </div>
+                                        <div class="form-floating mb-4 mt-4">
+                                            <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="nomina"
+                                            placeholder="Sueldo" name="nomina" value="<?php echo $dato['nomina'];?>" maxlength="8">
+                                            <label for="nomina" class="text-white"><i class="bi bi-person-fill"></i> Sueldo:</label>
+                                        </div>
 
-            <div class="input-group  pe-5 m-4 mt-2">
-            <span class="input-group-text bg-primary bg-opacity-75 text-white"i class="bi bi-person-fill"></i>Teléfono&nbsp;</span>
-                <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="telefonoEmpleado"
-                 name="telefonoEmpleado" value="<?php echo $dato['telefonoEmpleado'];?>">
-            </div>
+                                </div>
 
-            <div class="input-group  pe-5 m-4 mt-2">
-            <span class="input-group-text bg-primary bg-opacity-75 text-white"i class="bi bi-person-fill"></i>Rango:&nbsp;</span>
-                <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="rangoEmpleado"
-                 name="rangoEmpleado" value="<?php echo $dato['rangoEmpleado'];?>">
-            </div>
+                                <div class="col">
+                                    <div class="form-floating mb-4 ">
+                                        <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="telefonoEmpleado"
+                                        placeholder="No. Teléfono" name="telefonoEmpleado" value="<?php echo $dato['telefonoEmpleado'];?>" maxlength="12">
+                                        <label for="telefonoEmpleado" class="text-white"><i class="bi bi-person-fill"></i> No. teléfono del Empleado:</label>
+                                    </div>
+                                    <div class="input-group  mt-4 mb-4">
+                                        <span class="input-group-text bg-primary bg-opacity-75 text-white"><i class="bi bi--fill"></i>Tipo de Contrato:</span>
+                                        <select class="form-select bg-primary bg-opacity-50 text-white" name="tipodeContrato" id="tipodeContrato">
+                                                <option ><?php echo $dato['tipodeContrato'];?></option>
+                                                <option >Definido</option>
+                                                <option >Indefinido</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group  mt-4 mb-4">
+                                    </div>
+                                    <div class="input-group mb-4 mt-2">
+                                        <span class="input-group-text bg-primary bg-opacity-75 text-white"><i class="bi bi--fill"></i>Tipo de documento:</span>
+                                        <select class="form-select bg-primary bg-opacity-50 text-white" name="tipoDocumento" id="tipoDocumento">
+                                                <option ><?php echo $dato['tipoDocumento'];?></option>
+                                                <option >CC</option>
+                                                <option >CE</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group  mt-4 mb-4">
+                                    </div>
+                                    <div class="input-group mb-4 mt-4">
+                                    <span class="input-group-text bg-primary bg-opacity-75 text-white"i class="bi bi-fill"></i>Cargo:</span>
+                                    <select class="form-select bg-primary bg-opacity-50 text-white" name="cargo" id="cargo">
+                                            <option value="<?php echo $dato['idCargo'];?>"> <?php echo $dato['cargo'];?></option>
+                                            <?php
+                                            $conec = $conectar -> conectarDB();
+                                                $sql="SELECT * FROM car ORDER BY cargo ASC ";
+                                                $resultset = $conec->query($sql);
+                                                    while($fila = $resultset->fetch_assoc()){   
+                                                        echo "<option value=".$fila['idCargo']."> ".$fila['cargo']." </option>";
+                                                    }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    
+                                </div>
+     <!--Fin row-->  </div>
 
-            <div class="input-group  pe-5 m-4 mt-2">
-            <span class="input-group-text bg-primary bg-opacity-75 text-white"i class="bi bi-person-fill"></i>Tipo de contrato:&nbsp;</span>
-                <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="tipodeContrato"
-                 name="tipodeContrato" value="<?php echo $dato['tipodeContrato'];?>">  
-            </div>
-
-            <div class="input-group  pe-5 m-4 mt-2">
-            <span class="input-group-text bg-primary bg-opacity-75 text-white"i class="bi bi-person-fill"></i>Sueldo:&nbsp;</span>
-                <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="nomina"
-                 name="nomina" value="<?php echo $dato['nomina'];?>">  
-            </div>
+           
             <div class=" ps-4 pe-4 d-grid">
                 <div class="btn-group">
                 <button  name="modificar" id="modificar" class="btn btn-primary me-2" type="submit">Modificar</button>
@@ -116,6 +148,7 @@ if(!isset($_SESSION ["Usuario"])){
             
             </form>
         </div>
+        <script src="alertas.js"></script>
 
     </body>
 </html>

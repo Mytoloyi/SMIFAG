@@ -32,10 +32,35 @@
 
     <body class="text-primary">
     <br>
+    <div class="container">
+        <?php 
+        if(isset($_SESSION["registro"])){
+            
+            $registro = $_SESSION["registro"] ;
+            echo '<div class="alert alert-primary alert-dismissible fade show mt-5 bg-primary  bg-opacity-75 rounded" >
+           
+            <button class="btn-close text-white" type="button" data-bs-dismiss="alert"></button>
+            <label class="text-white"><i class="bi bi-exclamation-triangle"></i> '.$registro.'</label>
+            </div>';
+            unset($_SESSION["registro"]);
+        }
+        if(isset($_SESSION["Error"])){
+         
+            $Error = $_SESSION["Error"] ;
+            echo '<div class="alert alert-primary alert-dismissible fade show mt-5 bg-primary  bg-opacity-75 rounded" >
+           
+            <button class="btn-close text-white" type="button" data-bs-dismiss="alert"></button>
+            <label class="text-white"><i class="bi bi-exclamation-triangle"></i> '.$Error.'</label>
+            </div>';
+            unset($_SESSION["Error"]);
+        }
+        
+        ?>
+        </div>
         <div class="container bg-success  bg-opacity-75 rounded ">
         <h1 class="text-center text-white">Registro de actividades</h1>
-            <form action="agregarActividad.php" class="p-2"  method="POST">
-            <div class="input-group pe-5 m-4 mt-2 ">
+            <form action="agregarActividad.php" class="p-2"  method="POST" id="miFormulario">
+            <div class="input-group mb-4 ">
             <span class="input-group-text bg-primary bg-opacity-75 text-white"i class="bi bi-person-fill"></i>Actividad:&nbsp;</span>
             <select class="form-select bg-primary bg-opacity-50 text-white" name="nombreActividad" id="nombreActividad">
                   
@@ -53,14 +78,14 @@
 
           
                 
-                <div class="form-floating m-4 mt-2">
+                <div class="form-floating mb-4">
                 <input type="date" class="form-control bg-primary bg-opacity-50 text-white" id="fecha"
-                placeholder="Fecha" name="fecha" >
+                placeholder="Fecha" name="fecha" min="<?php echo date('Y-m-d'); ?>">
                 <label for="fecha" class="text-white"> Fecha: </label>
             </div>
                
                 
-            <div class="input-group m-4 mt-2 pe-5">
+            <div class="input-group mb-4 ">
             <span class="input-group-text bg-primary bg-opacity-75 text-white"i class="bi bi-person-fill"></i>Empleado:&nbsp;</span>
              <select class="form-select bg-primary bg-opacity-50 text-white" name="idEmpledo" id="idEmpledo">
              <option value="" >...</option> 
@@ -80,18 +105,26 @@
 
 
 
-            <div class=" ps-4 pe-4 d-grid">
-                <div class="btn-group">
-                <button  onclick="recargar()" class="btn btn-primary me-2" type="submit">Registrar</button>
-                <a   class="btn btn-primary ms-2" type="button" href="http://localhost/prototiposmifag/admin/tablas.php">Regresar</a>
-            </div>
-            </div>
+            <div class="row">
+                <div class="col-2 justify-content-center ">
+                    <button class="btn btn-primary me-2 "  id="limpiarCampos" type="button"><i class="bi bi-"> Limpiar</i></button>
+                </div>
+                <div class="col">
+                    <div class=" ps-4 pe-4 d-grid">
+                        <div class="btn-group">
+                            <button   class="btn btn-primary me-2" type="submit">Registrar</button>
+                            <a   class="btn btn-primary ms-2" type="button" href="http://localhost/prototiposmifag/admin/tablas.php">Regresar</a>
+                        </div>
+                    </div>
+                </div>
+             </div>
             
            
             
             </form>
         </div>
         <script src="../admin/controller/goback.js" ></script>
+        <script src="limpiar.js" ></script>
 
     </body>
 </html>

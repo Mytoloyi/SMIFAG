@@ -19,10 +19,11 @@ if(!isset($_SESSION ["Usuario"])){
         $documento=$con->real_escape_string($_POST['documentoSocio']);
         $telefono=$con->real_escape_string($_POST['telefonoSocio']);
         $marca=$con->real_escape_string($_POST['marca']);
+        $tipoDocumento=$con->real_escape_string($_POST['tipoDocumento']);
         
 
 
-        $actualiza="UPDATE socios SET nombreSocio='$nombre', apellidoSocio='$apellido', documentoSocio='$documento', telefonoSocio='$telefono', marca='$marca' WHERE idSocio='$id'";
+        $actualiza="UPDATE socios SET nombreSocio='$nombre', apellidoSocio='$apellido', documentoSocio='$documento', telefonoSocio='$telefono', marca='$marca', tipoDocumento='$tipoDocumento' WHERE idSocio='$id'";
         
         $actualizar= $con->query($actualiza);
         header("location: tablaSocios.php");
@@ -64,31 +65,38 @@ if(!isset($_SESSION ["Usuario"])){
             <div class="input-group pe-5 m-4 mt-2">
             <span class="input-group-text bg-primary bg-opacity-75 text-white"i class="bi bi-person-fill"></i>Nombre:&nbsp;</span>
                 <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="nombreSocio"
-                 name="nombreSocio" value="<?php echo $dato['nombreSocio'];?>">
+                 name="nombreSocio" value="<?php echo $dato['nombreSocio'];?>" maxlength="25">
             </div>
 
             <div class="input-group pe-5 m-4 mt-2">
             <span class="input-group-text bg-primary bg-opacity-75 text-white"i class="bi bi-person-fill"></i>Apellido:&nbsp;</span>
                 <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="apellidoSocio"
-                 name="apellidoSocio" value="<?php echo $dato['apellidoSocio'];?>">
+                 name="apellidoSocio" value="<?php echo $dato['apellidoSocio'];?>" maxlength="25">
             </div>
-
+            <div class="input-group mb-4 mt-2 ms-4 pe-5">
+                <span class="input-group-text bg-primary bg-opacity-75 text-white"><i class="bi bi--fill"></i>Tipo de documento:</span>
+                    <select class="form-select bg-primary bg-opacity-50 text-white" name="tipoDocumento" id="tipoDocumento">
+                        <option ><?php echo $dato['tipoDocumento'];?></option>
+                        <option >CC</option>
+                        <option >CE</option>
+                    </select>
+            </div>
             <div class="input-group pe-5 m-4 mt-2">
             <span class="input-group-text bg-primary bg-opacity-75 text-white"i class="bi bi-person-fill"></i>CC:&nbsp;</span>
                 <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="documentoSocio"
-                 name="documentoSocio" value="<?php echo $dato['documentoSocio'];?>">
+                 name="documentoSocio" value="<?php echo $dato['documentoSocio'];?>" maxlength="12">
             </div>
 
             <div class="input-group pe-5 m-4 mt-2">
             <span class="input-group-text bg-primary bg-opacity-75 text-white"i class="bi bi-person-fill"></i>Teléfono:&nbsp;</span>
                 <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="telefonoSocio"
-                 name="telefonoSocio" value="<?php echo $dato['telefonoSocio'];?>">
+                 name="telefonoSocio" value="<?php echo $dato['telefonoSocio'];?>" maxlength="12">
             </div>
 
             <div class="input-group pe-5 m-4 mt-2">
             <span class="input-group-text bg-primary bg-opacity-75 text-white"i class="bi bi-person-fill"></i>Marca:&nbsp;</span>
                 <input type="text" class="form-control bg-primary bg-opacity-50 text-white" id="marca"
-                 name="marca" value="<?php echo $dato['marca'];?>">
+                 name="marca" value="<?php echo $dato['marca'];?>" maxlength="4">
             </div>
 
            
@@ -103,6 +111,6 @@ if(!isset($_SESSION ["Usuario"])){
             
             </form>
         </div>
-
+        <script src="alertas.js" ></script>
     </body>
 </html>

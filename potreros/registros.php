@@ -45,13 +45,16 @@
         if(confirm("¿Desea eliminar el registro?")){
             const xhttp = new XMLHttpRequest();
             xhttp.onload= function(){
-                document.getElementById("tabla").innerHTML = this.responseText;
-                alert('Se ha eliminado');
+                if (this.responseText === "No se puede eliminar el potrero porque está siendo utilizado.") {
+                    alert(this.responseText);
+                } else {
+                    document.getElementById("tabla").innerHTML = this.responseText;
+                    alert('Se ha eliminado');
+                }
             };
 
             xhttp.open("GET","eliminarPotreros.php?id="+id);
             xhttp.send();
         }  
     }
-
 </script>

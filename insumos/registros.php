@@ -1,28 +1,27 @@
 <?php
-    class Conectar{
-        private $servidor;
-        private $user;
-        private $password;
-        private $status=0;
-
-        //LISTAR INSUMOS
-        function listaInsumos(){
-            $servidor="localhost";
-            $user="root";
-            $password="";
-            $database="finca_ganadera";
-            $con= new mysqli($servidor,$user,$password,$database);
+class Conectar{
+    private $servidor;
+    private $user;
+    private $password;
+    private $status=0;
+    //LISTAR EMPLEADOS
+    function listaInsumos(){
+        $servidor="localhost";
+        $user="root";
+        $password="";
+        $database="finca_ganadera";
+        $con= new mysqli($servidor,$user,$password,$database);
             $sql="SELECT * FROM insumos ORDER BY nombreInsumo ASC LIMIT 10";
             $resultset = $con->query($sql);
             if($resultset->num_rows>0){
                 while($fila = $resultset->fetch_assoc()){
-                    
                     echo "<tr>
                     <td>".$fila["idInsumo"]."</td>
                     <td>".$fila["nombreInsumo"]."</td> 
                     <td>".$fila["cantidadInsumo"]."</td>
                     <td>".$fila["fechavencimiento"]."</td> 
                     <td>".$fila["valorUnidad"]."</td> 
+                    <td>".$fila["novedades"]."</td> 
                     <td class='text-end pe-4 ps-4'> 
                     <a class='btn btn-success' href='editarInsumos.php?id=".$fila["idInsumo"]."' > <i class='bi bi-pencil'></i> </a> 
                     </td>
@@ -31,15 +30,11 @@
                     </td></tr>"; 
                 }
             }
-            
         }
     }
+
 ?>
-
-
-<script>
-
-    //INSUMOS
+<script> 
     function listaInsumos(id){
         var mensaje;
    
@@ -54,5 +49,4 @@
             xhttp.send();
         }  
     }
-
-</script>
+</script> 
